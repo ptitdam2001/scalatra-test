@@ -1,4 +1,4 @@
-# My first API #
+# Scalatra Test #
 
 ## Build & Run ##
 
@@ -6,6 +6,7 @@
 $ cd My_first_API
 $ ./sbt
 > container:start
+> ~ ;copy-resources;aux-compile
 > browse
 ```
 

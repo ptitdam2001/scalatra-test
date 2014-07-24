@@ -17,25 +17,16 @@ import org.json4s.{DefaultFormats, Formats}
 // JSON handling support from Scalatra
 import org.scalatra.json._
 
-class AdvertiserRoute extends BaseRouter {
+class AdvertiserRoute extends BaseRouter("advertisers") {
 
-  protected implicit val jsonFormats: Formats = DefaultFormats.withBigDecimal
-  val prefixPath = "/advertisers"
-
-  protected override def transformResponseBody(body: JValue): JValue = {
-
-    println(body)
-    println("toto ==="+body.children)
-    println("toto2 ==="+body.values)
-
-   body.values match {
+  protected override def transformResponseBody(body: JValue): JValue = body.values match {
      case list: List[Map[String,Any]] => {
        val transformed = ("count" -> list.size) ~ ("_embedded" -> ("advertisers" -> body))
        render(transformed)
      }
      case one: Map[String,Any] => body
-   }
   }
+
 
   get(prefixPath + "/:id") {
     Advertiser(Some(2L), 5001, 1, "my advertiser 2", None, Some(1L), None, None, None, List())
