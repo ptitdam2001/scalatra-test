@@ -20,13 +20,14 @@ object MyFirstApiBuild extends Build {
       name := Name,
       version := Version,
       scalaVersion := ScalaVersion,
-      resolvers += Classpaths.typesafeReleases,
+      resolvers ++= Resolvers.allResolvers,
       libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
         "org.scalatra" %% "scalatra-json" % "2.3.0",
         "org.json4s"   %% "json4s-jackson" % "3.2.9",
+        "com.typesafe.play" %% "play-json" % "2.3.2",
         "ch.qos.logback" % "logback-classic" % "1.0.6" % "runtime",
         "org.eclipse.jetty" % "jetty-webapp" % "9.1.3.v20140225" % "container",
         "org.eclipse.jetty" % "jetty-plus" % "9.1.3.v20140225" % "container",
@@ -46,4 +47,19 @@ object MyFirstApiBuild extends Build {
       }
     )
   )
+
+
+  object Resolvers {
+    val sprayResolver = Seq(
+      "spray repo" at "http://repo.spray.io/"
+    )
+
+    val typeSafeResolver = Seq(
+      "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
+    )
+
+
+    val allResolvers = typeSafeResolver ++ sprayResolver
+  }
+
 }
